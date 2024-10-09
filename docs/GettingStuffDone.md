@@ -49,7 +49,7 @@ $ sqlite3 --version
 ```
 
 ## Installing Rails <a name="installingrails"></a>
-Installing rails is verey simple. Use the `gem install` command provided by RubyGems:
+Installing rails is very simple. Use the `gem install` command provided by RubyGems:
 ```bash
 $ gem install rails
 ```
