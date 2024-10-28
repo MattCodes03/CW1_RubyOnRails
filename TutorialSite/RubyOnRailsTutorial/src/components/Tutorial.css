@@ -1,0 +1,11 @@
+.hljs {
+    background: #1E1E1E; /* Dark background */
+    color: #abb2bf; /* Default text color */
+    padding: 10px; /* Padding around the code block */
+    border-radius: 4px; /* Rounded corners */
+    overflow-x: auto; /* Allow horizontal scrolling */
+}
+
+.hljs-string {
+    color: #98c379; /* Green for strings */
+}
