@@ -13,11 +13,11 @@
    3.3 [Creating your own Views](#createview)
  
 
-## Introduction <a name="introduction"></a>
+## Introduction
 
 This tutorial is designed to give you a general overview of how Ruby on Rails works and what kind of stuff you can build with it. This guide will walk you through setting up a basic To-Do list web app making use of CRUD operations and a wide variety of the available Rails functionailty.
 
-## Prerequisites <a name="prerequisites"></a>
+## Prerequisites
 
 Before you can get started with rails, there are a couple of things you need to have installed first. These include:
 - Ruby
@@ -26,10 +26,14 @@ Before you can get started with rails, there are a couple of things you need to 
 ### Installing Ruby
 #### Linux/Unix
 - **Ubuntu/Debian**
-`sudo apt install ruby`
+```bash
+$ sudo apt install ruby
+```
 
 - **Arch**
-`sudo pacman -S ruby`
+```bash
+$ sudo pacman -S ruby
+```
 
 #### Windows
 Visit [RubyInstaller downloads page](https://rubyinstaller.org/) and download the latest version (choose the version that suits your architecture, usually the 64-bit version).
@@ -37,10 +41,14 @@ Visit [RubyInstaller downloads page](https://rubyinstaller.org/) and download th
 ### Installing SQLite3
 #### Linux/Unix
 - **Ubuntu/Debian**
-`sudo apt install sqlite`
+```bash 
+$ sudo apt install sqlite 
+```
 
 - **Arch**
-`sudo pacman -S sqlite`
+```bash
+$ sudo pacman -S sqlite
+```
 
 #### Windows
 Visit [SQLite downloads page](https://www.sqlite.org/download.html) and download the latest version usually located in the **Precompiled Binaries for Windows** section.
@@ -52,7 +60,7 @@ To test install, run the following command:
 $ sqlite3 --version
 ```
 
-## Installing Rails <a name="installingrails"></a>
+## Installing Rails
 Installing rails is very simple. Use the `gem install` command provided by RubyGems:
 ```bash
 $ gem install rails
@@ -63,8 +71,8 @@ $ gem install rails
 $ gem install erb
 ```
 
-## Welcome to Rails <a name="hellorails"></a>
-### Creating a Rails App <a name="createapp"></a>
+## Welcome to Rails
+### Creating a Rails App
 Rails comes with a number of generator scripts that can be used to speed up your development. One of these is the app genereator which is used when starting a new Rails project.
 
 Run the following:
@@ -73,7 +81,7 @@ $ rails new ToDoApp
 ```
 If successful this command will create a new `ToDoApp` directory where we will be working for the remainder of this tutorial.
 
-### Web Server <a name="webserver"></a>
+### Web Server
 Once you have created your project, there is already some starter code. To view this we need to start the web server.
 
 You can do this by running the following within the `ToDoApp` directory:<br>
@@ -85,7 +93,7 @@ $ bin/rails server
 
 This will start up Puma, a web server distributed with Rails by default. To see your application open a browser window and navigate to http://localhost:3000. You should now see the default Ruby on Rails landing page.
 
-### Setting your own Home Page <a name="settingindex"></a>
+### Setting your own Home Page
 To get rid of the default page and start displaying your own information, you need to create a *route*. Rails applications at minimum will always have a *route*, a controller with an *action*, and a *view*. The *route* will route to a *controller action*. This is where the work is done to handle the request, and prepare any data for the *view*. The *view* acts as a template to display any data in a desired format.
 
 > **NOTE:** Routes are rules written in a Ruby DSL (Domain-Specific Language). Controllers are Ruby classes, and their public methods are actions. And views are templates, usually written in a mixture of HTML and Ruby. *([Getting Started with Rails](https://guides.rubyonrails.org/getting_started.html#creating-a-new-rails-project-installing-rails))*
@@ -107,13 +115,13 @@ $ bin/rails generate controller Todo index --skip-routes
 
 You should no be able to see the Todo controller, located at `app/controllers/todo_controller.rb`
 
-## Model-View-Controller <a name="#mvc"></a>
+## Model-View-Controller
 As explained during the presentation, Ruby on Rails makes use of the Model-View-Controller (MVC) design pattern. In summary this pattern splits the app up into three easy to maintain sections:
 - Model - This is used to represent data.
 - View - Responsible for displaying the data.
 - Controller - Recieves, Processes and Provides the data.
 
-### Creating the Model <a name="#createmodel"></a>
+### Creating the Model
 #### Generating the Model
 To create a model we use the model generator.
 ```bash
@@ -153,7 +161,7 @@ To finish of this section, we will run the migration with the following command,
 ```bash
 $ bin/rails db:migrate
 ```
-### Adding more actions <a name="#addingactions"></a>
+### Adding more actions
 Now we have a model in our database, we need to create some actions so we can interact and do things with that model.
 
 As explained earlier, everything in your rails app will require a route, so lets create some within our `config/routes.rb` file.
@@ -166,6 +174,7 @@ Rails.application.routes.draw do
    get "/tasks", to: "todo#index"
    get "/tasks/new", to: "todo#new"  
    get "/tasks/:id", to: "todo#show", as: "task"
+   get "/tasks/:id/edit", to: "todo#edit", as: "edit_task"
  
    # Routes for creating, updating, and deleting tasks
    post "/tasks", to: "todo#create"            # Create a new task
@@ -179,6 +188,8 @@ Okay! That is a lot of code so lets break it down:
 - `get "/tasks", to: "todo#index"` - This is essentially the same as the `root` route, it just means if you visit http://localhost:3000/tasks you will see the index page.
 
 - `get "/tasks/:id", to: "todo#show", as: "task"` - This means that if we visit `/tasks/1` we will see the task with ID 1. The extra `as: "task"` allows us to use a helper method when generating URL's within views. Using `task_path(1)` will generate `/tasks/1` (This will help later on).
+
+- `get "/tasks/:id/edit", to: "todo#edit", as: "edit_task"` - This will allow us to access the edit page when attempting to edit tasks, this uses a helper method similar  ot the show route.
 
 - `post "/tasks/new", to: "todo#new"` - This is used to instansiate a new Task object, on the `/new` page which will present the user with a form to fill in the Task objects data. However, this is not saved into the Database just yet.
 
@@ -199,6 +210,9 @@ class TodoController < ApplicationController
   def show
     @task = Task.find(params[:id]) # Find the task by ID
   end
+      render :new, status: :unprocessable_entity  # Re-render the new form on failure
+    end
+  end
 
   def new
     @task = Task.new # Create new Task Object
@@ -208,11 +222,12 @@ class TodoController < ApplicationController
     @task = Task.new(task_params) # Create new tasks based on provided parameters
 
     if @task.save # Save the task, redirect if successful.
-      redirect_to @task
+      redirect_to root_path
     else
       render :new, status: :unprocessable_entity  # Re-render the new form on failure
     end
   end
+
 ```
 
 - `index` - This is will fetch all tasks from the Database and store them in the `@tasks` variable, which we will use within our view.
@@ -234,9 +249,14 @@ class TodoController < ApplicationController
     end
   end
 
-  def destroy
+   def destroy
     @task = Task.find(params[:id]) # Find the task by ID
-    @task.destroy # Destory the found Task
+  
+    if @task.destroy # Attempt to destroy the found Task
+      redirect_to root_path, notice: 'Task was successfully deleted.' # Redirect after deletion
+    else
+      redirect_to root_path, alert: 'Error deleting task.' # Redirect with an error message if deletion fails
+    end
   end
 
 private
@@ -251,17 +271,7 @@ end
 
 - `update` - This will first find the task we are attempting to update by ID. Once found we can thewn update the task based on the parameters stored in `task_params`.
 
-- `delete` - This does exactly what you think it does. Finds the task by ID then deletes it from the database.
-
-- `task_params` & `task_params_update` - These are private methods within our controller which are responsible for collecting and storing the parameters we will submit when either updating or creating a new task. These are part of the **Strong Paramaters** security feature within rails, as they will also prevent any unwanted attributes from finding their way into our requests.
-
-### Creating your own views <a name="#createview"></a>
-
-Now we have our routes and their actions created its time for some front-end. We will need to create some addtional files for each of our new views:
-1. `app/views/todo/show.html.erb`
-2. `app/views/todo/new.html.erb`
-
-First we will make some changes to our `app/views/todo/index.html.erb` file to display all the tasks in our database and allow the user to create new ones or view existing ones.
+- `destroy` - This does exactly what you think it does. Finds the task by ID then deletes it from the database, then redirects you to the index page.
 
 ```erb
 <h1>Tasks</h1>
@@ -319,3 +329,54 @@ Finally! We have a basic To-Do list web app. Now there are a few final things to
 #### Deletion and Updates
 Let's start by implementing the Delete Task functionailty. First add the following to your `app/views/todo/show.html.erb` file:
 
+```erb
+<%= form_with model: @task, method: :delete do %>
+  <%= submit_tag 'Delete Task', data: { confirm: 'Are you sure?' } %>
+<% end %>
+```
+
+This should now allow you to delete tasks. Give it a go!
+
+Finally lets add some update functionailty. The first step is to add an extra action to our `app/controllers/todo_controller` file:
+
+```ruby
+  def edit
+    @task = Task.find(params[:id]) # Find the task to edit
+  end
+```
+
+Now we need a way to reach our edit form. Add the following to your `app/views/todo/show.html.erb` file:
+
+```erb
+<%= link_to 'Edit', edit_task_path(@task) %> |
+```
+
+This will allow us to load the edit task form with the correct task information as it wil provide us with the ID. Next create a new ERB file, `app/views/todo/edit.html.erb` and provide it with the following.
+
+```erb
+<h1>Edit Task</h1>
+
+<%= form_with model: @task, url: task_path(@task), method: :patch do |form| %>
+  <div>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </div>
+
+  <div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %>
+  </div>
+
+  <div>
+    <%= form.label :completed %><br>
+    <%= form.check_box :completed %>
+  </div>
+
+  <div>
+    <%= form.submit "Update Task" %>
+  </div>
+<% end %>
+
+```
+
+And thats it! So long as you followed each instruction and nothing went horribly wrong, you now have a working ToDo list application built with Ruby on Rails. While our application doesn't look the prettiest you can have a go at adding your own styles if you'd like!
