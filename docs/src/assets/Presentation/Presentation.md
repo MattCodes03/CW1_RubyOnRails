@@ -1,6 +1,6 @@
 # Ruby on Rails Presentation
 
-![Slide1](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide1.jpg)
+![Slide1](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide1.jpg)
 “Ruby on Rails: Presented by myself Aaron Douglas, Matthew McCann, Lucas Weir and Andrew Jackson” 
 
 “Rails is an open-source application that thousands of people have contributed too.” 
@@ -9,9 +9,9 @@
 
 “The framework allows a web designer to work on both the front and back-end” 
 
-![Slide2](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide2.jpg)
+![Slide2](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide2.jpg)
 
-![Slide3](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide3.jpg)
+![Slide3](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide3.jpg)
 MVC 
 
 Let’s take a more in depth look at the MVC. MVC stands for Model, View, Controller, which are the three components that make up this common design pattern.  
@@ -22,13 +22,13 @@ Then we have the View, which is the user facing side of the pattern. It’s resp
 
 And finally, we have the Controller, the mediator between the Model and the View. It’s responsible for handling user input, HTTP requests managing application logic, telling the model to fetch data or update data, and selecting an appropriate view to render the
 
-![Slide4](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide4.jpg)
+![Slide4](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide4.jpg)
 ORM 
 
 Moving on now to ORM, or Object-Relational Mapping. ORM is a method of converting data from a database into a virtual database within an object-oriented programming language. So, for instance, let’s go back to our hypothetical user entity from the model. In an object-oriented programming language, the user entity may have several attributes, like name, home address, phone number, email address, so on and so on. ORM acts as a sort of translation layer, turning that sort of entity data into data that can be stored in a regular database. And it works the other way around, ORM can be used to take data from a database and pull it into the program, allowing for easy manipulation of that data from within an object-oriented programming language. In Ruby on Rails specifically, the implementation of ORM available to developers is called Active Record. Active Record allows us to perform regular CRUD operations using Ruby Methods instead of dealing directly with SQL, which simplifies the process by allowing developers to treat data from a database just like objects in their programming language. It also lets us define relationships between attributes that reflect the same sort of relationships in a database table. 
 
 
-![Slide5](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide5.jpg)
+![Slide5](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide5.jpg)
 REST 
 
 REST, or Representational State Transfer, is an architectural style used to design networked applications. REST uses HTTP requests to access and manipulate data through normal HTTP methods like POST, PUT and DELETE. Since its inception in 2000, it has become widely supported across the web. 
@@ -39,7 +39,7 @@ REST follows key principles like statelessness which means that each request con
 
 That wraps up all the key concepts you need to know about to understand how Rails works. 
 
-![Slide6](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide6.jpg)
+![Slide6](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide6.jpg)
 Routes and Actions 
 
 As part of this presentation there is a Ruby on Rails Tutorial for you to follow, but to give you an idea of what Rails looks like, I will now talk you through some of the code from that tutorial. 
@@ -62,12 +62,12 @@ Result
 
 This snippet from the running application displays the Task Page and the result of the corresponding show, action. 
 
-![Slide7](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide7.jpg)
+![Slide7](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide7.jpg)
 Embedded Ruby 
 
 Ruby on Rails provides the user with a templating language, that allows them to embedded ruby code within their HTML documents. This is Embedded Ruby. In this example we have used ERB to generate a list of tasks, which are stored in the tasks variable we defined when creating our actions for the index page. To do this we use a Ruby ‘for each’ loop where we add a list item for every task in the variable. This list item then provides a link to the task_path with the tasks ID. This looks something like /tasks/1. You can see what this code looks like when the application is running.
 
-![Slide8](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide8.jpg)
+![Slide8](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide8.jpg)
 Models and Migrations 
 
 In most if not all Rails applications you will be creating and using models. Models are used to represent data and are connected to a database. They typically handle database operations like CRUD, validation, and relationships. We can generate our model making use of the Rails generator [Point to command]. We can now make any changes we wish, in this example we set up our Task model to have some validation in the form of every task requiring a title. 
@@ -76,7 +76,7 @@ Migrations are used to update and make changes to the database. Migration files 
 
 To make these changes we simply execute the command seen here [Point to command]. This will run all migration files and apply any changes. 
 
-![Slide9](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide9.jpg)
+![Slide9](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide9.jpg)
 Rapid Design and Deployment 
 
 Ruby on Rails is well suited for projects that need rapid design and deployment. Its convention-over-configuration philosophy allows developers to quickly set up applications without rapidly. Its comprehensive suite of built-in tools and libraries, tasks such as database migrations, form validations, and testing are streamlined. Ruby On Rails also has a large and active community which provides ample support and resources (often called gems), ensuring that developers can build robust, scalable applications efficiently. 
@@ -93,7 +93,7 @@ Easy Full-Stack Stack Development
 
 Ruby on Rails also makes for an excellent choice for full stack development due to its comprehensive and cohesive framework. It integrates both front-end and back-end development, reducing development complexity. Rails' built-in MVC (Model-View-Controller) architecture ensures a clear separation of concerns, making code more maintainable and scalable. 
 
-![Slide10](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide10.jpg)
+![Slide10](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide10.jpg)
 There are many sites on the web that currently make use of Ruby on Rails in some capacity. In some cases, Rails was used to get the project off the ground, utilising Rails’ fast development time to get the project going quickly. One example of this would be Twitch TV, a popular streaming website that used Rails to build the backbone of its service before moving away from it in favour of “microservices.” 
 
 Another example would be Hulu, an American content on demand streaming service. This site was also originally built using Rails, with the framework once again providing a quick way for Hulu to get their service running amidst competitors like Netflix, Amazon Prime streaming and many others. Again, Hulu overhauled their web services and moved away from Rails in favour of a more compartmentalized “microservices” structure. 
@@ -104,7 +104,7 @@ GitHub, which we are all familiar with, has also followed a similar path. The si
 
 Other examples include Code Academy, Good Reads and Kickstarter. 
 
-![Slide11](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide11.jpg)
+![Slide11](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide11.jpg)
 
 Ruby on Rails, like any development framework, has things that it does better and worse than other frameworks.  
 
@@ -116,7 +116,7 @@ Rails’ encouragement of RESTful principles and rigidity when compared to other
 
 And another thing that Rails does well is making Databases simple and easy to work with. Rails, according to their doctrine, places the happiness of the developer first, and simplifying working with databases is a great way to do that. This is facilitated by the ORM style database handling, which incorporates object-oriented programming concepts like inheritance, persistence, and data mapping (think Int, String, float etc.) which makes working with databases easier for programmers. 
 
-![Slide12](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide12.jpg)
+![Slide12](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide12.jpg)
 
-![Slide13](/CW1_RubyOnRails/docs/src/assets/Presentation/Slides/Slide13.jpg)
+![Slide13](/CW1_RubyOnRails/src/assets/Presentation/Slides/Slide13.jpg)
 
