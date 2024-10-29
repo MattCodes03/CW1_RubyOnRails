@@ -1,8 +1,8 @@
 # Getting Stuff Done with Ruby on Rails
 
-1. [Introduction](#introduction)
-   1.1 [Prerequisites](#prerequisites)
-      1.1.1 [Installing Rails](#installingrails)
+1. [Introduction]()
+   1.1 [Prerequisites]()
+      1.1.1 [Installing Rails]()
 2. [Welcome to Rails](#hellorails)
    2.1. [Creating a Rails App](#createapp)
    2.2. [Web Server](#webserver)
