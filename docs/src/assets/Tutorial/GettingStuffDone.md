@@ -1,16 +1,16 @@
 # Getting Stuff Done with Ruby on Rails
 
-1. [Introduction](/tutorial)
-   1.1 [Prerequisites]()
-      1.1.1 [Installing Rails]()
-2. [Welcome to Rails](#hellorails)
-   2.1. [Creating a Rails App](#createapp)
-   2.2. [Web Server](#webserver)
-   2.3. [Setting your own Home Page](#settingindex)
-3. [Model-View-Controller](#mvc)
-   3.1 [Creating the Model](#createmodel)
-   3.2 [Adding more actions](#addingactions)
-   3.3 [Creating your own Views](#createview)
+1. Introduction
+   1.1 Prerequisites
+      1.1.1 Installing Rails
+2. Welcome to Rails
+   2.1. Creating a Rails App
+   2.2. Web Server
+   2.3. Setting your own Home Page
+3. Model-View-Controller
+   3.1 Creating the Model
+   3.2 Adding more actions
+   3.3 Creating your own Views
  
 
 ## Introduction
