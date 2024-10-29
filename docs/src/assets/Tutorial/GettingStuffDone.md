@@ -1,6 +1,6 @@
 # Getting Stuff Done with Ruby on Rails
 
-1. [Introduction]()
+1. [Introduction](/tutorial)
    1.1 [Prerequisites]()
       1.1.1 [Installing Rails]()
 2. [Welcome to Rails](#hellorails)
